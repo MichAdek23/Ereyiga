@@ -1,23 +1,30 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel';
 
 const PhotoGallery: React.FC = () => {
-  // Placeholder images - you can replace these with actual photos of your friend
+  // Real photos of Ereyigabubari
   const photos = [
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      url: "/lovable-uploads/88bcda8b-7c26-489d-9d4a-5759fda97d7a.png",
       caption: "All the great moments we've shared"
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1472396961693-142e6e269027",
+      url: "/lovable-uploads/198e2ce5-1370-4321-ac0b-ffdd1bbc8a75.png",
       caption: "From secondary school to university"
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1721322800607-8c38375eef04",
+      url: "/lovable-uploads/de334417-84cf-487e-9079-4d2a441d7a0b.png",
       caption: "Celebrating your special day!"
     },
   ];
@@ -29,15 +36,46 @@ const PhotoGallery: React.FC = () => {
           Memories Together
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:hidden">
+          <Carousel className="w-full max-w-lg mx-auto">
+            <CarouselContent>
+              {photos.map((photo) => (
+                <CarouselItem key={photo.id}>
+                  <Card className="overflow-hidden shadow-lg">
+                    <CardContent className="p-0">
+                      <div className="relative h-80 w-full">
+                        <img 
+                          src={photo.url} 
+                          alt={`Ereyigabubari photo ${photo.id}`} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="p-4 bg-white">
+                        <p className="text-center font-montserrat text-gray-700">{photo.caption}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center mt-4">
+              <CarouselPrevious className="static translate-y-0 mr-2" />
+              <CarouselNext className="static translate-y-0 ml-2" />
+            </div>
+          </Carousel>
+        </div>
+        
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6">
           {photos.map((photo) => (
             <Card key={photo.id} className="overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <CardContent className="p-0">
-                <img 
-                  src={photo.url} 
-                  alt={`Photo ${photo.id}`} 
-                  className="w-full h-64 object-cover"
-                />
+                <div className="relative h-80 w-full">
+                  <img 
+                    src={photo.url} 
+                    alt={`Ereyigabubari photo ${photo.id}`} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="p-4 bg-white">
                   <p className="text-center font-montserrat text-gray-700">{photo.caption}</p>
                 </div>
@@ -45,10 +83,6 @@ const PhotoGallery: React.FC = () => {
             </Card>
           ))}
         </div>
-        
-        <p className="text-center mt-8 text-gray-500 italic">
-          * Replace these with actual photos of Ereyigabubari for the actual gift
-        </p>
       </div>
     </div>
   );
